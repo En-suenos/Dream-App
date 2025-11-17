@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: dream-app
+    env: docker
+    repo: https://github.com/En-suenos/Dream-App.git
+    plan: free
+    branch: main
+    healthCheckPath: /
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_DEBUG
+        value: false
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase: true
+        property: host
+      - key: DB_PORT
+        fromDatabase: true
+        property: port
+      - key: DB_DATABASE
+        fromDatabase: true
+        property: database
+      - key: DB_USERNAME
+        fromDatabase: true
+        property: user
+      - key: DB_PASSWORD
+        fromDatabase: true
+        property: password
+
+databases:
+  - name: dreamdb
+    plan: free
+    engine: postgres
